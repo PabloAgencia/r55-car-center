@@ -2678,7 +2678,10 @@ document.addEventListener('DOMContentLoaded', function() {
     showTyping();
 
     try {
-      const res = await fetch('/api/chat', {
+      const res = await /* El chat vive en workers.dev, no dentro de la propia web: asi sigue
+         respondiendo aunque los bloqueos de LaLiga tumben las IPs de
+         pages.dev, y funciona igual servida desde GitHub Pages. */
+      fetch('https://r55-chat.ia-pablo-agencia.workers.dev/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: conversationHistory, sessionId })
